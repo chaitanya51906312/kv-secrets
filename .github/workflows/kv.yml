@@ -1,0 +1,19 @@
+name: github_action_azure_kv_secrets
+ 
+on:
+  push:
+ 
+jobs:
+  docker_build_push_acr:
+    name: 'GitHub Action to retreive secrets from Azure Key Vault and deploy example resource groups to Azure'
+    runs-on: ubuntu-18.04
+    environment: production
+   
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+  
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
